@@ -1,0 +1,78 @@
+
+
+/*How to align input boxes
+Getting bottom border to extend to end of division*/
+
+body {
+	font-family: 'Montserrat', sans-serif;
+}
+
+h1 {
+	text-align:center;
+	font-size:54px;
+}
+
+p {
+	padding-left:5%;
+}
+
+input {
+	padding-top:4%;
+	margin-top:4%;
+}
+
+.smallerInput {
+	width:15%;
+}
+
+.container {
+	width:70%;
+	overflow:hidden;
+	margin-left:11%;
+	position:relative;
+}
+
+.mealDetails,
+.customerCharges,
+.earningsInfo {
+	border:1px solid black;
+/*	padding:2%;*/
+}
+
+.mealDetails {
+	width:44%;
+	display:inline-block;
+	height:28rem;
+	margin-left:9%;
+}
+
+.headerUnderline {
+	border-bottom:1px solid black;
+}
+
+.mealDetails button {
+	padding:2% 8%;
+	margin-top:25%;
+	margin-left:19%;
+}
+
+#cancelButton {
+	margin-left:5%;
+}
+
+.customerCharges,
+.earningsInfo {
+	float:right;
+	width:32%;
+	margin-right:6%;
+	height:12.5rem;
+}
+
+.customerCharges,
+.earningsInfo  > p  {
+	padding-top:1%;
+}
+
+.earningsInfo {
+	margin-top:-23%;
+}
