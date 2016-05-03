@@ -10,3 +10,20 @@ console.log("working")
 // Hit submit ---> values go to controller to make sure they are correct ---> No, then send error message
 // Hit submit (ng-submit=function()) --> Values go to controller for evaluation ---> calculations are made ---> return values to View
 // Tip amount gets passed to EarnInfo, meal count++, and two values are divided ---> value gets returned to view
+
+angular.module("waitstaffCalc", [])
+	.controller("updateContent", function($scope){
+
+		$scope.defaultScope = false;
+		var mealCount = 1;
+		$scope.tips = {};
+
+		$scope.submit = function(){
+			$scope.defaultScope = $scope.waitstaffInput.$valid;
+			$scope.mealCount = mealCount++;
+			$scope.tips.push({{tipPercent}});
+			console.log($scope.tips)
+			
+		}; 
+
+	});

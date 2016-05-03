@@ -8,37 +8,40 @@
     <title>Wait Staff Calculator</title>
 </head>
 
-<body ng-app="">
+<body ng-app="waitstaffCalc">
     <h1>Waitstaff Calculator</h1>
-    <div class="container">
+    <div class="container" ng-controller="updateContent">
         <div class="mealDetails">
-            <p class="headerUnderline">Enter the Meal Details</p>
-            <p>Base Meal Price: %
-                <input type="number">
-            </p>
-            <p>Tax Rate: %
-                <input type="number" name="taxRate" class="smallerInput" />
-            </p>
-            <p>Tip Percentage: %
-                <input type="number" name="tipPercent" class="smallerInput">
-            </p>
-            <div class="buttons">
-                <button>Submit</button>
-                <button id="cancelButton">Cancel</button>
-            </div>
+            <form name="waitstaffInput" novalidate>
+            {{waitstaffInput.$valid}}
+                <p class="headerUnderline">Enter the Meal Details</p>
+                <p>Base Meal Price: $
+                    <input type="number" ng-model="baseMealPrice" required>
+                </p>
+                <p>Tax Rate: %
+                    <input type="number" class="smallerInput" ng-model="taxRate" required/>
+                </p>
+                <p>Tip Percentage: %
+                    <input type="number" class="smallerInput" ng-model="tipPercent" required>
+                </p>
+                <div class="buttons">
+                    <button type="submit" ng-click="submit()">Submit</button>
+                    <button id="cancelButton">Cancel</button>
+                </div>
+            </form>
         </div>
         <div class="customerCharges">
             <p class="headerUnderline">Customer Charges</p>
-            <p>Subtotal: {{}}</p>
-            <p>Tip: {{}}</p>
+            <p>Subtotal: <span ng-show="defaultScope">{{ baseMealPrice + (taxRate/100 * baseMealPrice) }}</span></p>
+            <p>Tip: <span ng-show="defaultScope">{{ baseMealPrice * (tipPercent/100) }}</span></p>
             <hr />
-            <p>Total: {{}}</p>
+            <p>Total: <span ng-show="defaultScope">{{ (baseMealPrice + (taxRate/100 * baseMealPrice)) + (baseMealPrice * (tipPercent/100))}}</span></p>
         </div>
         <div class="earningsInfo">
             <p class="headerUnderline">My Earnings Info</p>
-            <p>Tip Total: {{}}</p>
-            <p>Meal count: {{}}</p>
-            <p>Average Tip Per Meal: {{}}</p>
+            <p>Tip Total: <span ng-show="defaultScope">{{}}</span></p>
+            <p>Meal count: <span ng-show="defaultScope">{{mealCount}}</span></p>
+            <p>Average Tip Per Meal: <span ng-show="defaultScope">{{}}</span></p>
         </div>
     </div>
 </body>

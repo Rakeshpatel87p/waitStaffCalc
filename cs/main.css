@@ -1,7 +1,5 @@
-
-
 /*How to align input boxes
-Getting bottom border to extend to end of division*/
+*/
 
 body {
 	font-family: 'Montserrat', sans-serif;
@@ -29,21 +27,25 @@ input {
 	width:70%;
 	overflow:hidden;
 	margin-left:11%;
-	position:relative;
+	/*position:relative;*/
 }
 
 .mealDetails,
 .customerCharges,
 .earningsInfo {
 	border:1px solid black;
-/*	padding:2%;*/
+	padding:2%;
 }
 
+form {
+	
+}
 .mealDetails {
+	height:29.1rem;
 	width:44%;
-	display:inline-block;
-	height:28rem;
 	margin-left:9%;
+	display:inline-block;
+
 }
 
 .headerUnderline {
@@ -74,5 +76,5 @@ input {
 }
 
 .earningsInfo {
-	margin-top:-23%;
+	margin-top:-27%;
 }
