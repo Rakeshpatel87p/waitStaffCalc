@@ -25,7 +25,7 @@
                     <input type="number" class="smallerInput" ng-model="tipPercent" required>
                 </p>
                 <div class="buttons">
-                    <button type="submit" ng-click="submit()">Submit</button>
+                    <button type="submit" ng-click="submit() && tipSummation()">Submit</button>
                     <button id="cancelButton">Cancel</button>
                 </div>
             </form>
@@ -33,15 +33,15 @@
         <div class="customerCharges">
             <p class="headerUnderline">Customer Charges</p>
             <p>Subtotal: <span ng-show="defaultScope">{{ baseMealPrice + (taxRate/100 * baseMealPrice) }}</span></p>
-            <p>Tip: <span ng-show="defaultScope">{{ baseMealPrice * (tipPercent/100) }}</span></p>
+            <p>Tip: <span ng-show="defaultScope">{{ tips[tips.length - 1] }}</span></p>
             <hr />
             <p>Total: <span ng-show="defaultScope">{{ (baseMealPrice + (taxRate/100 * baseMealPrice)) + (baseMealPrice * (tipPercent/100))}}</span></p>
         </div>
         <div class="earningsInfo">
             <p class="headerUnderline">My Earnings Info</p>
-            <p>Tip Total: <span ng-show="defaultScope">{{}}</span></p>
+            <p>Tip Total: <span ng-show="defaultScope">{{total}}</span></p>
             <p>Meal count: <span ng-show="defaultScope">{{mealCount}}</span></p>
-            <p>Average Tip Per Meal: <span ng-show="defaultScope">{{}}</span></p>
+            <p>Average Tip Per Meal: <span ng-show="defaultScope">{{total/mealCount}}</span></p>
         </div>
     </div>
 </body>
