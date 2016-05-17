@@ -34,15 +34,15 @@ input {
 .customerCharges,
 .earningsInfo {
 	border:1px solid black;
-	padding:2%;
+	/*padding:2%;*/
 }
 
 form {
 	
 }
 .mealDetails {
-	height:29.1rem;
-	width:44%;
+	height:26.1rem;
+	width:48%;
 	margin-left:9%;
 	display:inline-block;
 
@@ -65,9 +65,8 @@ form {
 .customerCharges,
 .earningsInfo {
 	float:right;
-	width:32%;
-	margin-right:6%;
-	height:12.5rem;
+	width:37%;
+	height:11.5rem;
 }
 
 .customerCharges,
@@ -76,5 +75,11 @@ form {
 }
 
 .earningsInfo {
-	margin-top:-27%;
+	margin-top:-21%;
+}
+
+#resetButton {
+	float:right;
+	margin:1% 6% 0 0;
+	padding:1% 2%;
 }
