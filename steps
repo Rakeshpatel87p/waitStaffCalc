@@ -1,6 +1,3 @@
 Steps:
 
-2) Migrate controller properly so that the numbers run.
-	-rootScope method (have tried pegging variables to root that are used in my-earnings page but not displaying proper numbers when page loads to my-earnings page)
-		-But views share controllers so wouldn't they share variable values?
-3) Make sure all buttons are functioning.
+Reset button - not clearing earnings data immediately. Have to come back to go into diff view and return to have values erased. 
