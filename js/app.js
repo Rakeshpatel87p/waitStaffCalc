@@ -2,14 +2,14 @@ angular.module("waitstaffCalc", ['ngRoute', 'ngAnimate'])
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider
 
-        .when('/home', {
-            templateUrl: 'home.html',
-            controller: 'updateContent',
-        })
+            .when('/home', {
+                templateUrl: 'home.html',
+                controller: 'updateContent',
+            })
             .when('/new-meal', {
-            templateUrl: 'new-meal.html',
-            controller: 'updateContent',
-        })
+                templateUrl: 'new-meal.html',
+                controller: 'updateContent',
+            })
 
         .when('/my-earnings', {
             templateUrl: 'my-earnings.html',
@@ -35,58 +35,72 @@ angular.module("waitstaffCalc", ['ngRoute', 'ngAnimate'])
     });
 })
 
-.controller("updateContent", function($rootScope, $scope) {
+.factory('inputData', function() {
+    var data = {
+        tipSummation: 0, 
+        mealCount: 0,
+        defaultScope: false,
+        tips:[]
+    }
 
-    $rootScope.defaultScope = false;
+    return data;
+
+})
+
+.controller("updateContent", function($rootScope, $scope, inputData) {
+
+    $scope.defaultScope = inputData.defaultScope;
     // start mealcount. Starts at 1 to bring initial displayed value to 1.
-    $rootScope.mealCount = 0;
+    $scope.mealCount = inputData.mealCount;
     // create a new object to store tip values throughout submissions.
-    $scope.tips = [];
+    $scope.tips = inputData.tips;
 
     // triggered upon ng-click w/ button. Tried with form submission but didn't work properly(reason?)
     $scope.submit = function() {
         // Makes sure numbers are valid numbers
-        $rootScope.defaultScope = $scope.waitstaffInput.$valid;
-
+        inputData.defaultScope = $scope.waitstaffInput.$valid;
+        $scope.defaultScope = inputData.defaultScope;
         // Conduct calculations for Customer Charges Field
-        $rootScope.subTotalAmount = $scope.baseMealPrice + ($scope.taxRate / 100 * $scope.baseMealPrice);
-        $rootScope.tipPercentAmount = ($scope.tipPercent / 100) * $scope.baseMealPrice;
-        $rootScope.totalAmount = $scope.subTotalAmount + $scope.tipPercentAmount;
+        $scope.subTotalAmount = $scope.baseMealPrice + ($scope.taxRate / 100 * $scope.baseMealPrice);
+        $scope.tipPercentAmount = ($scope.tipPercent / 100) * $scope.baseMealPrice;
+        // $scope.tipPercentAmount = inputData.tipAmount
+        $scope.totalAmount = $scope.subTotalAmount + $scope.tipPercentAmount;
 
         // Push value from view to array
-        $scope.tips.push($rootScope.tipPercentAmount);
+        inputData.tips.push($scope.tipPercentAmount);
 
         //Calculates # of meals and pushes to view 
-        $rootScope.mealCount++;
-        console.log($rootScope.mealCount);
-        $rootScope.tipSummation();
+        $scope.mealCount++;
+        inputData.mealCount++;
+        $scope.tipSummation();
 
     };
     // For loop that iterates through the array values, adding them up.
-    $rootScope.tipSummation = function() {
+    $scope.tipSummation = function() {
         var total = 0;
         for (var i = 0; i < $scope.tips.length; i++) {
             total += $scope.tips[i];
         }
-        console.log()
+        inputData.tipSummation = total;
         return total;
     };
     // Keeps an eye on the tips array and makes changes when it notices a change
-    $rootScope.$watchCollection("tips", function() {
-        $rootScope.totalTips = $rootScope.tipSummation();
+    $scope.$watchCollection("tips", function() {
+        $scope.totalTips = $scope.tipSummation();
     });
 
     // Clear fields upon cancel button click
-    $rootScope.clearMealDetailFields = function() {
-        $rootScope.baseMealPrice = "";
-        $rootScope.taxRate = "";
-        $rootScope.tipPercent = "";
+    $scope.clearMealDetailFields = function() {
+        $scope.baseMealPrice = "";
+        $scope.taxRate = "";
+        $scope.tipPercent = "";
     };
 
-    $rootScope.resetForm = function() {
-        $rootScope.clearMealDetailFields();
-        $rootScope.defaultScope = false;
-        $rootScope.mealCount = 0;
-        $rootScope.tips = [];
+    $scope.resetForm = function() {
+        $scope.clearMealDetailFields();
+        inputData.defaultScope = false;
+        $scope.mealCount = 0;
+        $scope.tips = [];
     }
-});
+
+})
