@@ -97,8 +97,6 @@ angular.module("waitstaffCalc", ['ngRoute', 'ngAnimate'])
 
     $scope.resetForm = function() {
         $scope.defaultScope = false;
-        inputData.defaultScope = $scope.defaultScope;
-        console.log(inputData.defaultScope);
         $scope.mealCount = 0;
         $scope.tips = [];
     }
